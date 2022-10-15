@@ -5,7 +5,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <link rel="stylesheet" href="StyleSheet.css" type="text/css" media="screen" runat="server" />
+    <link href="~/Styles/StyleSheet.css" rel="stylesheet" type="text/css" media="screen" runat="server" />
     <title></title>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
@@ -53,8 +53,9 @@
                         //alert(typeof (data)); //it comes out to be string 
                         //we need to parse it to JSON 
                         data = $.parseJSON(data);
-                        if (data == -1) alert("Внесена недостаточная сумма денег!");
-                        else alert("Наслаждайтесь кофе! Ваша сдача: " + data);
+                        if (data == -1) {  if (!alert("Внесена недостаточная сумма денег!")) { window.location.reload(); } }
+                        else { { if (!alert("Наслаждайтесь кофе! Ваша сдача: " + data)) { window.location.reload(); } } }
+                        
                     }
                 },
                 error: function (req, status, error) {
@@ -84,23 +85,23 @@
         <div>
             <a>
                 <img id="blackCoffee" src="blackCoffee.jpg" alt="" onclick="SelectBeverage('blackCoffee')" runat="server"  />
-                <p>38р</p>
+                <p id="blackCoffee_price" runat="server" >price</p>
             </a>
             <a>
                 <img id="espresso"  src="espresso.jpg" alt="" onclick="SelectBeverage('espresso')" runat="server"  />
-                <p>42р</p>
+                <p id="espresso_price" runat="server"  >price</p>
             </a>
             <a>
                 <img id="cappuccino"  src="cappuccino.jpg" alt="" onclick="SelectBeverage('cappuccino')" runat="server"  />
-                <p>50р</p>
+                <p id="cappuccino_price" runat="server" >price</p>
             </a>
             <a>
                 <img id="macchiato"  src="macchiato.jpg" alt="" onclick="SelectBeverage('macchiato')" runat="server"  />
-                <p>56р</p>
+                <p id="macchiato_price" runat="server" >price</p>
             </a>
             <a>
-                <img id="сoffeeWithCream" src="сoffeeWithCream.jpg" alt="" onclick="SelectBeverage('coffeeWithCream')" runat="server"  />
-                <p>49р</p>
+                <img id="coffeeWithCream" src="coffeeWithCream.jpg" alt="" onclick="SelectBeverage('coffeeWithCream')" runat="server"  />
+                <p id="coffeeWithCream_price" runat="server" >price</p>
             </a>
         </div>
 

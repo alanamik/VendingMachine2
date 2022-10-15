@@ -24,6 +24,15 @@ namespace VendingMachine
         protected global::System.Web.UI.HtmlControls.HtmlImage blackCoffee;
 
         /// <summary>
+        /// blackCoffee_price control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl blackCoffee_price;
+
+        /// <summary>
         /// espresso control.
         /// </summary>
         /// <remarks>
@@ -31,6 +40,15 @@ namespace VendingMachine
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlImage espresso;
+
+        /// <summary>
+        /// espresso_price control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl espresso_price;
 
         /// <summary>
         /// cappuccino control.
@@ -42,6 +60,15 @@ namespace VendingMachine
         protected global::System.Web.UI.HtmlControls.HtmlImage cappuccino;
 
         /// <summary>
+        /// cappuccino_price control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl cappuccino_price;
+
+        /// <summary>
         /// macchiato control.
         /// </summary>
         /// <remarks>
@@ -51,12 +78,30 @@ namespace VendingMachine
         protected global::System.Web.UI.HtmlControls.HtmlImage macchiato;
 
         /// <summary>
-        /// сoffeeWithCream control.
+        /// macchiato_price control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage сoffeeWithCream;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl macchiato_price;
+
+        /// <summary>
+        /// coffeeWithCream control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage coffeeWithCream;
+
+        /// <summary>
+        /// coffeeWithCream_price control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl coffeeWithCream_price;
     }
 }

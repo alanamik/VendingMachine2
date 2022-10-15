@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Services;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace VendingMachine
@@ -12,11 +13,11 @@ namespace VendingMachine
     public partial class ClientSide : System.Web.UI.Page
     {
         static VendingMachineRepository repos = new VendingMachineRepository();
-
         protected void Page_Load(object sender, EventArgs e)
         {
 
             CheckCountOfBeverages();
+            CheckPrice();
         }
 
         /*  [WebMethod]
@@ -45,11 +46,26 @@ namespace VendingMachine
 
           }*/
 
+        public void CheckPrice()
+        {
+            using (AppContext _db = new AppContext())
+            {
+                foreach (Beverage b in _db.Beverages)
+                {
+                    string str = b.name + "_price";
+                    //var priceBox = (System.Web.UI.HtmlControls.HtmlArea)Page.FindControl(str);
+                    HtmlGenericControl priceBox = new HtmlGenericControl();
+                    string attrStr = b.name + ".jpg";
+                    priceBox.InnerText = b.price + "р.";
+                    Debug.Print($"{b.id} - - - {b.price}");
+                }
+            }
+        }
+
         public void CheckCountOfBeverages()
         {
             using (AppContext _db = new AppContext())
             {
-                // Уменьшаем кол-во напитков на один
                 foreach (Beverage b in _db.Beverages)
                 {
                     Debug.Print($"{b.id} --- {b.name}");
@@ -78,11 +94,6 @@ namespace VendingMachine
             }
         }
 
-        public static void StartChecking()
-        {
-            CheckCountOfBeverages();
-        }
-
         [WebMethod(enableSession: true)]
         public static int Sell(int coins, string nameOfBeverage)
         {
@@ -106,14 +117,9 @@ namespace VendingMachine
                     // Уменьшаем кол-во напитков на один
                     foreach (Beverage b in _db.Beverages)
                     {
-                        if (b.count != 0) 
-                        { b.count--; 
-                        
-                        }                       
+                        if (b.count>0) b.count--;                                                                        
                     }
-
-                    CheckCountOfBeverages();
-
+                    
                     //Рассчитываем сдачу
                     int change = coins - beverage.price;
                     Debug.Print("Change - " + change.ToString());
@@ -125,7 +131,6 @@ namespace VendingMachine
                     Log log = new Log();
                     log.id = count+1;
                     log.date = DateTime.Today.Date;
-                    //log.date = "11.10.2022";
                     log.buying = nameOfBeverage;
                     log.revenue = beverage.price;
                     _db.Logs.Add(log);
