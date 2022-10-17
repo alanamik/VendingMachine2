@@ -12,56 +12,37 @@ namespace VendingMachine
 {
     public partial class ClientSide : System.Web.UI.Page
     {
-        static VendingMachineRepository repos = new VendingMachineRepository();
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            // При загрузке страницы загружаем цены и кол-во напитков
             CheckCountOfBeverages();
             CheckPrice();
         }
 
-        /*  [WebMethod]
-          public static string ShowInsertedCoins()
-          {
-             // return "You inserted: " + coins.ToString();
-          }*/
-
-
-        /* [WebMethod]
-         public static string BtnAddCoin(int coin)
-         {
-             coins = +coin;
-             return coins.ToString();
-             //ShowInsertedCoins();
-         }*/
-
-        /*  [WebMethod(enableSession: true)]
-          public static void BtnAddCoin(int coin)
-          {
-
-              int MyCoins = (int)HttpContext.Current.Session["CoinCount"];
-              MyCoins += coin;
-              HttpContext.Current.Session["CoinCount"] = MyCoins;
-              //Debug.Print("coins = " + MyCoins.ToString());
-
-          }*/
-
+        // Загрузка цен
         public void CheckPrice()
         {
             using (AppContext _db = new AppContext())
-            {
-                foreach (Beverage b in _db.Beverages)
-                {
-                    string str = b.name + "_price";
-                    //var priceBox = (System.Web.UI.HtmlControls.HtmlArea)Page.FindControl(str);
-                    HtmlGenericControl priceBox = new HtmlGenericControl();
-                    string attrStr = b.name + ".jpg";
-                    priceBox.InnerText = b.price + "р.";
-                    Debug.Print($"{b.id} - - - {b.price}");
-                }
+            { 
+                    Beverage b = _db.Beverages.FirstOrDefault(p => p.name == "blackCoffee");
+                blackCoffee_price.InnerText = b.price.ToString();
+
+                b = _db.Beverages.FirstOrDefault(p => p.name == "espresso");
+                espresso_price.InnerText = b.price.ToString();
+
+                b = _db.Beverages.FirstOrDefault(p => p.name == "cappuccino");
+                cappuccino_price.InnerText = b.price.ToString();
+
+                b = _db.Beverages.FirstOrDefault(p => p.name == "macchiato");
+                macchiato_price.InnerText = b.price.ToString();
+
+                b = _db.Beverages.FirstOrDefault(p => p.name == "coffeeWithCream");
+                coffeeWithCream_price.InnerText = b.price.ToString();
+
             }
         }
 
+        // Загрузка кол-ва напитков и картинок к ним
         public void CheckCountOfBeverages()
         {
             using (AppContext _db = new AppContext())
@@ -71,9 +52,6 @@ namespace VendingMachine
                     Debug.Print($"{b.id} --- {b.name}");
                     if (b.count != 0)
                     {
-                        /*var myTextboxControl = (TextBox)Page.FindControl("b.name");
-                        myTextboxControl.Attributes.Add("onclick", "window.open('someOtherLink');")*/
-
                         var myTextboxControl = (System.Web.UI.HtmlControls.HtmlImage)Page.FindControl(b.name);
                         string funcName = "SelectBeverage('" + b.name + "')";
                         myTextboxControl.Attributes.Add("onclick", funcName);
@@ -94,22 +72,16 @@ namespace VendingMachine
             }
         }
 
+        // Продажа напитка
         [WebMethod(enableSession: true)]
         public static int Sell(int coins, string nameOfBeverage)
         {
-
-            //int MyCoins = (int)HttpContext.Current.Session["CoinCount"];
-           // MyCoins += coin;
-           // HttpContext.Current.Session["CoinCount"] = MyCoins;
             Debug.Print("coins = " + coins.ToString());
             Debug.Print("nameOfBeverage = " + nameOfBeverage);
-
             using (AppContext _db = new AppContext())
             {
                 // Ищем в бд выбранный напиток
                 Beverage beverage = _db.Beverages.FirstOrDefault(p => p.name == nameOfBeverage);
-                Debug.Print("Founded - " + beverage.name);
-
                 // Если внесено недостаточно монет
                 if (beverage.price > coins) return -1;
                 else
@@ -118,8 +90,7 @@ namespace VendingMachine
                     foreach (Beverage b in _db.Beverages)
                     {
                         if (b.count>0) b.count--;                                                                        
-                    }
-                    
+                    }                   
                     //Рассчитываем сдачу
                     int change = coins - beverage.price;
                     Debug.Print("Change - " + change.ToString());

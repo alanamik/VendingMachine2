@@ -1,13 +1,13 @@
-﻿
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ClientSide.aspx.cs" Inherits="VendingMachine.ClientSide" Async="true" AsyncTimeout="60" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ClientSide.aspx.cs" Inherits="VendingMachine.ClientSide" Async="true" AsyncTimeout="60" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <link href="~/Styles/StyleSheet.css" rel="stylesheet" type="text/css" media="screen" runat="server" />
+    
     <title></title>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link href="~/Styles/StyleSheet.css" rel="stylesheet" type="text/css" media="screen" runat="server" />
     <script type="text/javascript">
 
         let insertedCoins = 0;
@@ -22,7 +22,7 @@
             var showCoins = document.getElementById('insertedCoins');
             showCoins.textContent = "Вы внесли " + insertedCoins;
         }
-        function SelectBeverage(beverage) {          
+        function SelectBeverage(beverage) {
             selectedBeverage = beverage;
             ShowSelectedBeverage();
         }
@@ -50,73 +50,90 @@
                 success: function (response) {
                     if (response != null && response.d != null) {
                         var data = response.d;
-                        //alert(typeof (data)); //it comes out to be string 
-                        //we need to parse it to JSON 
                         data = $.parseJSON(data);
-                        if (data == -1) {  if (!alert("Внесена недостаточная сумма денег!")) { window.location.reload(); } }
+                        if (data == -1) { if (!alert("Внесена недостаточная сумма денег!")) { window.location.reload(); } }
                         else { { if (!alert("Наслаждайтесь кофе! Ваша сдача: " + data)) { window.location.reload(); } } }
-                        
+
                     }
                 },
                 error: function (req, status, error) {
                     alert("x" + error + status);
                 }
-            }).done(function (result) { })}
+            }).done(function (result) { })
+        }
     </script>
 </head>
 <body>
     <div>
         <h1>Coffee machine</h1>
-    </div>
-    <div>
-        <div>
-            <p>Внесите монеты: </p>
-            <div class="outer">
-                    <a class="inner" onclick="AddCoin(1)">1 </a>
-                    <a class="inner" onclick="AddCoin(2)">2 </a>
-                    <a  class="inner"  onclick="AddCoin(5)">5 </a>
-                    <a  class="inner"  onclick="AddCoin(10)">10 </a>             
+    </div>      
+        <h2>Внесите монеты: </h2>
+            
+    <div class="btnCoins-group">
+
+         <br />
+                <a class="btn btn-info" onclick="AddCoin(1)">1</a>
+                <a class="btn btn-info" onclick="AddCoin(2)">2</a>
+                <a class="btn btn-info" onclick="AddCoin(5)">5</a>
+                <a class="btn btn-info" onclick="AddCoin(10)">10</a>
+   </div>
+    <br />
+    <br />
+    <br />
+
+ <div>  <br /><h2>Выберите напиток: </h2>   <br /></div>
+
+   <br />    
+    
+    <div class="container">
+
+        <div class="row-coffeeImages">
+            <div class="column-coffeeImage">
+                <a>
+                    <img id="blackCoffee" src="blackCoffee.jpg" alt="" onclick="SelectBeverage('blackCoffee')" runat="server" />
+                    <p id="blackCoffee_price" runat="server">price</p>
+                </a>
+            </div>
+            <div class="column-coffeeImage">
+                <a>
+                    <img id="espresso" src="espresso.jpg" alt="" onclick="SelectBeverage('espresso')" runat="server" />
+                    <p id="espresso_price" runat="server">price</p>
+                </a>
+
+            </div>
+            <div class="column-coffeeImage">
+                <a>
+                    <img id="cappuccino" src="cappuccino.jpg" alt="" onclick="SelectBeverage('cappuccino')" runat="server" />
+                    <p id="cappuccino_price" runat="server">price</p>
+                </a>
+            </div>
+
+            <div class="column-coffeeImage">
+                <a>
+                    <img id="macchiato" src="macchiato.jpg" alt="" onclick="SelectBeverage('macchiato')" runat="server" />
+                    <p id="macchiato_price" runat="server">price</p>
+                </a>
+            </div>
+
+            <div class="column-coffeeImage">
+                <a>
+                    <img id="coffeeWithCream" src="coffeeWithCream.jpg" alt="" onclick="SelectBeverage('coffeeWithCream')" runat="server" />
+                    <p id="coffeeWithCream_price" runat="server">price</p>
+                </a>
             </div>
         </div>
     </div>
 
-    <div>
-        <p>Выберите напиток: </p>
-        <div>
-            <a>
-                <img id="blackCoffee" src="blackCoffee.jpg" alt="" onclick="SelectBeverage('blackCoffee')" runat="server"  />
-                <p id="blackCoffee_price" runat="server" >price</p>
-            </a>
-            <a>
-                <img id="espresso"  src="espresso.jpg" alt="" onclick="SelectBeverage('espresso')" runat="server"  />
-                <p id="espresso_price" runat="server"  >price</p>
-            </a>
-            <a>
-                <img id="cappuccino"  src="cappuccino.jpg" alt="" onclick="SelectBeverage('cappuccino')" runat="server"  />
-                <p id="cappuccino_price" runat="server" >price</p>
-            </a>
-            <a>
-                <img id="macchiato"  src="macchiato.jpg" alt="" onclick="SelectBeverage('macchiato')" runat="server"  />
-                <p id="macchiato_price" runat="server" >price</p>
-            </a>
-            <a>
-                <img id="coffeeWithCream" src="coffeeWithCream.jpg" alt="" onclick="SelectBeverage('coffeeWithCream')" runat="server"  />
-                <p id="coffeeWithCream_price" runat="server" >price</p>
-            </a>
-        </div>
-
-    </div>
-
-    <div>
-        <div>
+    <br />
+    <p></p>
+    <div class="containerPay" > 
+         <br />
+    <p></p>
             <p id="selectBeverage"></p>
-        </div>
-        <div>
+      <br />
             <p id="insertedCoins"></p>
-        </div>
-        <div>
-            <button onclick="Pay()">Купить </button>
-        </div>
+     <br />
+            <button onclick="Pay()">Купить </button>     
     </div>
 </body>
 </html>

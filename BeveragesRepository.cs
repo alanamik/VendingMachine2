@@ -9,21 +9,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace VendingMachine
 {
-    public class VendingMachineRepository
-    {
-
-        //private static BeveragesRepository repository = new BeveragesRepository();
-        // private List<Beverage> responses = new List<Beverage>();
-        private  AppContext _db = new AppContext();
-        public void Sell()
-        {
-
-        }
-    }
-
+    // Класс для создания строки подключения к БД
     public class Constants
     {
-        // Проверка подлинности Windows
+        // Проверка подлинности Windows (Для разработки и тестирования)
         public static string SqlConnectionIntegratedSecurity
         {
             get
@@ -39,47 +28,32 @@ namespace VendingMachine
                 return sb.ConnectionString;
             }
         }
-
-
-        // Проверка подлинности SQL сервером
-        /* public static string SqlConnectionSQLServer
-         {
-             get
-             {
-                 var sb = new SqlConnectionStringBuilder
-                 {
-                     DataSource = "Путь к серверу SQL",
-                     IntegratedSecurity = false,
-                     InitialCatalog = "DBMSSQL",
-                     UserID = "Имя пользователя",
-                     Password = "Пароль"
-                 };
-
-                 return sb.ConnectionString;
-             }
-         }*/
+        public static string appPlace = AppDomain.CurrentDomain.BaseDirectory;
+        public static string connectString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename='%CONTENTROOTPATH%App_Data\\CoffeeMachine.mdf';Integrated Security=True";
     }
 
+
+    // Класс записи в журнал учета
     public class Log
-    {      
-        [Key] 
+    {
+        [Key]
         public int id { get; set; }
         public DateTime date { get; set; }
         public string buying { get; set; }
         public int revenue { get; set; }
     }
 
+    // Класс для доступа к БД
     public class AppContext : DbContext
     {
         public DbSet<Beverage> Beverages { get; set; }
         public DbSet<Log> Logs { get; set; }
 
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer(@"Data Source=srv-mts\sql2008;Initial Catalog=VM;Integrated Security=True");
-            optionsBuilder.UseSqlServer(Constants.SqlConnectionIntegratedSecurity);
-            // optionsBuilder.UseSqlServer(@"Server=.\sql2008;Database=VM;Trusted_Connection=True;");
+            string n = Constants.appPlace;
+            Constants.connectString = Constants.connectString.Replace("%CONTENTROOTPATH%", n);
+            optionsBuilder.UseSqlServer(Constants.connectString);
         }
     }
 }

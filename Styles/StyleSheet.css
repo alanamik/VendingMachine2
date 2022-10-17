@@ -1,9 +1,86 @@
 ﻿body {
+    background-color: #fafffb;
+    font-family:Arial, Helvetica, sans-serif;
 
-    background-color: aqua;
 }
 
-.inner {
-    color:crimson;
+h1 {
+    width:100%;
+    height:15%;
+    text-align:left;
+}
+
+h2 {
+    width: 100%;
+    height: 15%;
+    text-align: left;
+}
+
+.container {
+    width:100%;
+}
+
+button {
+    width: 10%;
+    background-color: #f7a600;
+    border: 2px solid #fafffb;
+    color: #6d2413;
+    padding: 10px 24px;
+    cursor: pointer;
+    float: left;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+button:hover {
+    background-color: #f7a600d4;
+}
+
+.btnCoins-group {
+    float:left;
+}
+.btnCoins-group a {
+    background-color: #f7a600;
+    border: 2px solid #fafffb;
+    color: #6d2413;
+    padding: 10px 24px;
+    cursor: pointer;
+    float: left;
+}
+
+.btnCoins-group a:hover {
+    background-color: #f7a600d4;
+}
+
+
+.row-coffeeImages {
+    width: 100%;
+}
+.column-coffeeImage {
+    float: left;
+    width: 12%;
+    padding: 2%;
+}
+
+.column-coffeeImage img {
+    opacity:1;
+    cursor: pointer;
+    width:100%;
+}
+
+.column-coffeeImage img:hover {
+    background-color: #f7a600d4;
+}
+
+.column-coffeeImage p {
+    width: 100%;
+    height: 20%;
+    float:inline-end;
+    text-align:center;
+}
+
+div.containerPay {
+    width:100%;
+    padding: 2%;
+    float:left;
 }
 
