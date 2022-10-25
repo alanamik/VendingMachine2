@@ -30,7 +30,7 @@ namespace VendingMachine
             {
                 foreach (Beverage b in _db.Beverages)
                 {
-                    SelectBeverage.Items.Add(b.name);
+                    SelectBeverage.Items.Add(b.Name);
                 }
             }
         }
@@ -40,10 +40,10 @@ namespace VendingMachine
         {
             using (AppContext _db = new AppContext())
             {
-                Beverage b = _db.Beverages.FirstOrDefault(p => p.name == name);
-                showName.InnerText = "Название: " + b.name;
-                showPrice.InnerText = "Цена: " + b.price.ToString();
-                showCount.InnerText = "Количество: " + b.count.ToString();
+                Beverage b = _db.Beverages.FirstOrDefault(p => p.Name == name);
+                showName.InnerText = "Название: " + b.Name;
+                showPrice.InnerText = "Цена: " + b.Price.ToString();
+                showCount.InnerText = "Количество: " + b.Count.ToString();
             }
         }
 
@@ -57,7 +57,7 @@ namespace VendingMachine
             Beverage b = new Beverage();
             using (AppContext _db = new AppContext())
             {
-                b = _db.Beverages.FirstOrDefault(p => p.name == name);
+                b = _db.Beverages.FirstOrDefault(p => p.Name == name);
             }
             return JsonConvert.SerializeObject(b);
         }
@@ -69,10 +69,10 @@ namespace VendingMachine
             using (AppContext _db = new AppContext())
             {
                 Beverage bev = new Beverage();
-                bev.id = (_db.Beverages.Max(b => b.id)) + 1;
-                bev.name = name;
-                bev.count = count;
-                bev.price = price;
+                bev.Id = (_db.Beverages.Max(b => b.Id)) + 1;
+                bev.Name = name;
+                bev.Count = count;
+                bev.Price = price;
 
                 _db.Beverages.Add(bev);
                 _db.SaveChanges();
@@ -86,9 +86,9 @@ namespace VendingMachine
         {
             using (AppContext _db = new AppContext())
             {
-                var bev = _db.Beverages.Where(b => b.name == name).FirstOrDefault();
-                bev.price = price;
-                bev.count = count;
+                var bev = _db.Beverages.Where(b => b.Name == name).FirstOrDefault();
+                bev.Price = price;
+                bev.Count = count;
                 _db.SaveChanges();
                 return 1;
             }

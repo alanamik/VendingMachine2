@@ -28,8 +28,8 @@ namespace VendingMachine
                 return sb.ConnectionString;
             }
         }
-        public static string appPlace = AppDomain.CurrentDomain.BaseDirectory;
-        public static string connectString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename='%CONTENTROOTPATH%App_Data\\CoffeeMachine.mdf';Integrated Security=True";
+        public static string AppPlace = AppDomain.CurrentDomain.BaseDirectory;
+        public static string ConnectString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename='%CONTENTROOTPATH%App_Data\\CoffeeMachine.mdf';Integrated Security=True";
     }
 
 
@@ -37,10 +37,10 @@ namespace VendingMachine
     public class Log
     {
         [Key]
-        public int id { get; set; }
-        public DateTime date { get; set; }
-        public string buying { get; set; }
-        public int revenue { get; set; }
+        public int Id { get; set; }
+        public DateTime Date { get; set; }
+        public string Buying { get; set; }
+        public int Revenue { get; set; }
     }
 
     // Класс для доступа к БД
@@ -51,9 +51,9 @@ namespace VendingMachine
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string n = Constants.appPlace;
-            Constants.connectString = Constants.connectString.Replace("%CONTENTROOTPATH%", n);
-            optionsBuilder.UseSqlServer(Constants.connectString);
+           string n = Constants.AppPlace;
+           Constants.ConnectString = Constants.ConnectString.Replace("%CONTENTROOTPATH%", n);
+           optionsBuilder.UseSqlServer(Constants.ConnectString);
         }
     }
 }

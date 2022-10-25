@@ -10,9 +10,9 @@ namespace VendingMachine
     public class Beverage
     {
         [Key]
-        public int id { get; set; }
-        public string name { get; set; }
-        public int count { get; set; }
-        public int price { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Count { get; set; }
+        public int Price { get; set; }
     }
 }
