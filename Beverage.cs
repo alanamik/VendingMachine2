@@ -9,6 +9,7 @@ namespace VendingMachine
     // Класс напитка, продающегося в автомате
     public class Beverage
     {
+
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }

@@ -30,6 +30,7 @@ namespace VendingMachine
         }
         public static string AppPlace = AppDomain.CurrentDomain.BaseDirectory;
         public static string ConnectString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename='%CONTENTROOTPATH%App_Data\\CoffeeMachine.mdf';Integrated Security=True";
+    
     }
 
 

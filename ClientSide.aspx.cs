@@ -42,6 +42,7 @@ namespace VendingMachine
             }
         }
 
+
         // Загрузка кол-ва напитков и картинок к ним
         public void CheckCountOfBeverages()
         {

@@ -80,6 +80,7 @@ namespace VendingMachine
             }
         }
 
+
         // Изменить данные о напитке в БД
         [WebMethod(enableSession: true)]
         public static int ChangeBeverageInfo(string name, int count, int price)
